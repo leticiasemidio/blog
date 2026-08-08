@@ -1,0 +1,45 @@
+---
+// NOTE ON MVP SCOPE: this page is real and live at /en/projects/, but it is
+// intentionally left out of the header/footer nav for the MVP (see the
+// commented-out nav items in Header.astro and Footer.astro). Nothing needs
+// to change here to bring it back — just uncomment the nav links.
+//
+// The 6 case studies below are still static placeholder cards, not yet
+// individual pages the way the Resources articles are. When you're ready,
+// the same content-collection pattern used for src/content/resources/
+// can be reused here (e.g. src/content/projects/) to give each one its
+// own real URL.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const projects = [
+  { category: 'UX writer', title: 'Building this portfolio', blurb: 'Planning, structuring and writing this very site from a blank page.' },
+  { category: 'AI content designer', title: 'A reviewer AI agent for UX copy', blurb: 'An AI agent that checks tone, consistency and guideline adherence before human review.' },
+  { category: 'UX writer', title: 'Onboarding rewrite for a fintech app', blurb: 'Simplified account setup copy end to end, reducing first-week drop-off.' },
+  { category: 'UX writer', title: 'Content design system from scratch', blurb: 'Patterns and components that gave a product team a shared writing language.' },
+  { category: 'AI content designer', title: 'Reusable AI prompts for UX writing', blurb: 'A prompt library that speeds up first drafts without losing voice.' },
+  { category: 'UX writer', title: 'Auditing three years of legacy content', blurb: 'A full inventory and pruning pass that cut redundant content by half.' },
+];
+---
+<BaseLayout
+  title="Projects — Leticia S. Emidio"
+  description="Condensed UX writing and AI content design case studies."
+  currentPage="projects"
+>
+  <div class="wrap section" style="padding-bottom:0;">
+    <p class="eyebrow">Portfolio</p>
+    <h1>Projects</h1>
+    <p class="lede">Condensed case studies from UX writing and AI content design work.</p>
+  </div>
+  <div class="wrap section">
+    <div class="card-grid">
+      {projects.map((p) => (
+        <article class="card">
+          <div class="card-media">Image placeholder · 21:9</div>
+          <span class="tag tag-case">{p.category}</span>
+          <h3>{p.title}</h3>
+          <p>{p.blurb}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Contact — Leticia S. Emidio"
+  description="Get in touch with Leticia S. Emidio, UX Writer & AI Content Strategist."
+  currentPage="contact"
+>
+  <div class="wrap section">
+    <p class="eyebrow">Contact</p>
+    <h1>Let us talk</h1>
+    <p class="lede">Tell me what brought you here so I can reply with the right context.</p>
+
+    <div class="contact-grid" style="margin-top:32px;">
+      <div>
+        <!--
+          FORM IS NOT WIRED UP YET.
+          This form currently does nothing when submitted — it needs a real
+          service behind it before launch. The simplest option is Formspree
+          (https://formspree.io): create a free form there, then replace the
+          action="#" below with the endpoint they give you, and remove the
+          preventDefault() in the script at the bottom of this file.
+        -->
+        <p id="contact-success" role="status" style="display:none; background:var(--wine-tint); color:var(--wine); border-radius:var(--radius); padding:18px 20px; font-weight:500;">
+          Thanks — your message was sent. I will reply within two business days.
+        </p>
+        <form id="contact-form" action="#" method="POST">
+          <div class="form-field">
+            <label for="c-name">Name</label>
+            <input type="text" id="c-name" name="name" required>
+          </div>
+          <div class="form-field">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" name="email" required>
+          </div>
+          <div class="form-field">
+            <label for="c-reason">Reason for contact</label>
+            <select id="c-reason" name="reason">
+              <option>Recruiting</option>
+              <option>Collaboration</option>
+              <option>Consulting</option>
+              <option>Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p class="form-note" style="margin-top:10px;">Your details are only used to reply to you.</p>
+        </form>
+      </div>
+      <div class="contact-direct">
+        <h3>Prefer email?</h3>
+        <p><a href="mailto:hello@leticiasemidio.com" class="link-arrow">hello@leticiasemidio.com</a></p>
+        <h3>Find me elsewhere</h3>
+        <div class="social-links">
+          <a href="#" class="icon-btn" aria-label="LinkedIn">in</a>
+          <a href="#" class="icon-btn" aria-label="Instagram">ig</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Demo-only success state. Remove this once the form action points to a
+  // real service (see the comment inside the form above) — that service
+  // will handle the actual submit and this preventDefault() should go away.
+  const form = document.getElementById('contact-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    (form as HTMLElement).style.display = 'none';
+    const success = document.getElementById('contact-success');
+    if (success) success.style.display = 'block';
+  });
+</script>

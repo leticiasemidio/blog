@@ -1,0 +1,44 @@
+---
+// Same note as src/pages/en/projects/index.astro: this page is real and
+// live at /en/services/, just intentionally left out of the MVP nav.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Services — Leticia S. Emidio"
+  description="Consulting, mentoring, courses and ebooks from Leticia S. Emidio."
+  currentPage="services"
+>
+  <div class="wrap section" style="padding-bottom:24px;">
+    <p class="eyebrow">Services</p>
+    <h1>Ways to work together</h1>
+    <p class="lede">Free resources live in the hub above. These are paid engagements for teams and individuals who want direct help.</p>
+  </div>
+  <div class="wrap section" style="padding-top:0;">
+    <div class="card-grid">
+      <article class="card service-card">
+        <h3>Consulting</h3>
+        <p>Hands-on help auditing, planning or scaling your content and content operations.</p>
+        <p class="price-note">Project-based, scoped after a discovery call.</p>
+        <a href="/en/contact/" class="btn btn-secondary btn-sm">Book a call</a>
+      </article>
+      <article class="card service-card">
+        <h3>Mentoring</h3>
+        <p>1:1 sessions for UX writers who want structured, honest feedback on their path.</p>
+        <p class="price-note">Monthly slots, limited availability.</p>
+        <a href="/en/contact/" class="btn btn-secondary btn-sm">Apply for a slot</a>
+      </article>
+      <article class="card service-card">
+        <h3>Courses</h3>
+        <p>Cohort-based courses on UX writing fundamentals and AI-assisted content workflows.</p>
+        <p class="price-note">Next cohort: dates announced by email.</p>
+        <a href="/en/contact/" class="btn btn-secondary btn-sm">Join the waitlist</a>
+      </article>
+      <article class="card service-card">
+        <h3>Ebooks</h3>
+        <p>Self-paced guides you can work through at your own speed, no calls required.</p>
+        <p class="price-note">Launching soon.</p>
+        <a href="/en/contact/" class="btn btn-secondary btn-sm">Get notified</a>
+      </article>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allResources = await getCollection('resources', ({ data }) => !data.draft);
+const latest = allResources
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const tagLabels: Record<string, string> = {
+  guide: 'Guide',
+  case: 'Case study',
+  template: 'Template',
+  framework: 'Framework',
+};
+
+// One card per lifecycle stage, linking straight into the Resources hub.
+const objectives = [
+  { label: 'Start here', slug: 'start-here', blurb: 'New to UX writing? Begin with these before anything else.' },
+  { label: 'Organize', slug: 'organize', blurb: 'Structuring the work before you touch a single sentence.' },
+  { label: 'Plan', slug: 'plan', blurb: 'Aligning stakeholders and finding what already exists.' },
+  { label: 'Audit', slug: 'audit', blurb: 'Evaluating what you have before deciding what to change.' },
+  { label: 'Write', slug: 'write', blurb: 'Turning strategy into words people actually read.' },
+  { label: 'Improve', slug: 'improve', blurb: 'Making existing content clearer and more effective.' },
+  { label: 'Scale', slug: 'scale', blurb: 'Making the work sustainable as volume grows.' },
+];
+---
+<BaseLayout
+  title="Leticia S. Emidio — UX Writer & AI Content Strategist"
+  description="Leticia S. Emidio turns complexity into clarity through words, systems and AI. UX writing resources and case studies."
+  currentPage="home"
+>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <h1>Crafting experiences that <span class="accent-gold">scale</span>.</h1>
+        <p class="lede">Using content design, strategy and AI to build scalable systems while keeping the human touch.</p>
+        <div class="hero-ctas">
+          <a href="/en/projects/" class="btn btn-primary">Explore my work</a>
+          <!-- HIDDEN FOR MVP (secondary hero CTA). Remove this comment wrapper
+               to bring "Browse resources" back as a second button.
+          <a href="/en/resources/" class="btn btn-secondary">Browse resources</a>
+          -->
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 240 240" width="240" height="240" aria-hidden="true">
+          <circle cx="150" cy="95" r="70" fill="var(--gold)" opacity="0.5"></circle>
+          <path d="M40 210 C 70 150, 60 90, 95 40" fill="none" stroke="var(--wine)" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M60 205 C 85 160, 80 110, 110 70" fill="none" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round"></path>
+          <circle cx="95" cy="40" r="6" fill="var(--wine)"></circle>
+          <circle cx="110" cy="70" r="5" fill="var(--navy)"></circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap section">
+    <div class="section-head center">
+      <p class="eyebrow">Find what you need</p>
+      <h2>Whatever your goal, there is a starting point</h2>
+    </div>
+    <div class="card-grid">
+      {objectives.map((o) => (
+        <a href={`/en/resources/#${o.slug}`} class="card objective-card">
+          <h3>{o.label}</h3>
+          <p style="margin:0;">{o.blurb}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="wrap section" style="padding-top:0;">
+    <div style="display:grid; grid-template-columns: .8fr 1.2fr; gap:40px; align-items:center;">
+      <div style="background:var(--surface-alt); border-radius: var(--radius-lg); aspect-ratio: 4/5; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:.85rem; border:1px solid var(--border);">Photo placeholder</div>
+      <div>
+        <p class="eyebrow">Hi, I am Leticia</p>
+        <h2>UX writer, content strategist and knowledge builder</h2>
+        <p>I combine human insight and AI to create content systems that inform, engage and drive results.</p>
+        <a href="/en/about/" class="link-arrow">More about me
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap section section-alt" style="border-radius: var(--radius-lg);">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+      <div>
+        <p class="eyebrow">From the resources hub</p>
+        <h2 style="margin:0;">Latest articles</h2>
+      </div>
+      <a href="/en/resources/" class="link-arrow">Browse all resources
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+    <div class="card-grid">
+      {latest.map((post) => (
+        <a href={`/en/resources/${post.slug}/`} class="card clickable-card">
+          <div class="card-media">Image placeholder · 21:9</div>
+          <div class="card-top-row">
+            <span class={`tag tag-${post.data.type}`}>{tagLabels[post.data.type]}</span>
+          </div>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+          <span class="link-arrow">Open article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- HIDDEN FOR MVP (Newsletter component, incl. RSS mention). Remove this
+       comment wrapper once a real email provider (see Fase 4 of the launch
+       plan) is connected to the form.
+  <div class="wrap section" style="padding-top:0;">
+    <div class="newsletter">
+      <div>
+        <h2>Curated knowledge. Built to share.</h2>
+        <p>New articles, frameworks and templates, straight to your inbox.</p>
+      </div>
+      <div class="newsletter-action">
+        <form class="newsletter-form" id="newsletter-form">
+          <label class="sr-only" for="newsletter-email">Your email address</label>
+          <input type="email" id="newsletter-email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="form-note">We will never share your email. Unsubscribe anytime. Prefer RSS? <a href="/feed.xml">Subscribe via feed</a>.</p>
+      </div>
+    </div>
+  </div>
+  -->
+</BaseLayout>

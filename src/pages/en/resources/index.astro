@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allResources = await getCollection('resources', ({ data }) => !data.draft);
+
+const tagLabels: Record<string, string> = {
+  guide: 'Guide',
+  case: 'Case study',
+  template: 'Template',
+  framework: 'Framework',
+};
+
+// The 7 lifecycle stages, in order. Each currently has exactly one article
+// (the MVP scope). When a stage gets a second article later, this page
+// will automatically list every non-draft article in that category —
+// nothing here needs to change, only new .md files need to be added.
+const stages = [
+  { slug: 'start-here', label: 'Start here', intro: 'New to UX writing? Begin with these before anything else.', category: 'Start here' },
+  { slug: 'organize', label: 'Organize', intro: 'Structuring the work before you touch a single sentence.', category: 'Organize' },
+  { slug: 'plan', label: 'Plan', intro: 'Aligning stakeholders and finding what already exists.', category: 'Plan' },
+  { slug: 'audit', label: 'Audit', intro: 'Evaluating what you have before deciding what to change.', category: 'Audit' },
+  { slug: 'write', label: 'Write', intro: 'Turning strategy into words people actually read.', category: 'Write' },
+  { slug: 'improve', label: 'Improve', intro: 'Making existing content clearer and more effective.', category: 'Improve' },
+  { slug: 'scale', label: 'Scale', intro: 'Making the work sustainable as volume grows.', category: 'Scale' },
+];
+
+const stageArticles = stages.map((stage) => ({
+  ...stage,
+  articles: allResources.filter((r) => r.data.category === stage.category),
+}));
+---
+<BaseLayout
+  title="Resources — Leticia S. Emidio"
+  description="UX writing frameworks, playbooks, templates and case studies from Leticia S. Emidio."
+  currentPage="resources"
+>
+  <div class="wrap section" style="padding-bottom:24px;">
+    <p class="eyebrow">Resources</p>
+    <h1>A content lifecycle, not a link dump</h1>
+    <p class="lede">Every article fits one stage of the same cycle: organize, plan, audit, write, improve, scale. New to the field? Start here first.</p>
+    <!-- HIDDEN FOR MVP (RSS feed link). The feed itself still exists at
+         /feed.xml — remove this comment wrapper to link it again.
+    <a href="/feed.xml" class="link-arrow" style="margin-top:8px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16" stroke-linecap="round"></path><circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"></circle></svg>
+      Subscribe via RSS
+    </a>
+    -->
+  </div>
+
+  <nav class="lifecycle-nav" aria-label="Resource categories">
+    <div class="wrap">
+      <ul>
+        {stages.map((s) => <li><a href={`#${s.slug}`}>{s.label}</a></li>)}
+      </ul>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    {stageArticles.map((stage) => (
+      <section class="resource-category" id={stage.slug}>
+        <div class="cat-head">
+          <div>
+            <h2 style="margin-bottom:4px;">{stage.label}</h2>
+            <p style="margin:0; max-width:56ch;">{stage.intro}</p>
+          </div>
+        </div>
+        <div class="card-grid">
+          {stage.articles.map((post) => (
+            <a href={`/en/resources/${post.slug}/`} class="card clickable-card">
+              <div class="card-media">Image placeholder · 21:9</div>
+              <div class="card-top-row">
+                <span class={`tag tag-${post.data.type}`}>{tagLabels[post.data.type]}</span>
+              </div>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+              <span class="link-arrow">Open article
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

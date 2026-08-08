@@ -1,0 +1,92 @@
+---
+// currentPage controls which nav link gets the "active" underline.
+// Pass one of: 'home' | 'about' | 'resources' | 'contact'
+interface Props {
+  currentPage?: string;
+}
+const { currentPage = '' } = Astro.props;
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/en/">
+      <span class="logo-name">Leticia S. Emidio</span>
+      <span class="logo-tag">UX Writer &amp; AI Content Strategist</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="/en/" class:list={["nav-link", { active: currentPage === 'home' }]}>Home</a></li>
+        <li><a href="/en/about/" class:list={["nav-link", { active: currentPage === 'about' }]}>About</a></li>
+        <!-- HIDDEN FOR MVP (Projects menu item). The page still exists at /en/projects/ —
+             remove this comment wrapper to bring it back into the nav.
+        <li><a href="/en/projects/" class:list={["nav-link", { active: currentPage === 'projects' }]}>Projects</a></li>
+        -->
+        <li><a href="/en/resources/" class:list={["nav-link", { active: currentPage === 'resources' }]}>Resources</a></li>
+        <!-- HIDDEN FOR MVP (Services menu item). The page still exists at /en/services/ —
+             remove this comment wrapper to bring it back into the nav.
+        <li><a href="/en/services/" class:list={["nav-link", { active: currentPage === 'services' }]}>Services</a></li>
+        -->
+        <li><a href="/en/contact/" class:list={["nav-link", { active: currentPage === 'contact' }]}>Contact</a></li>
+      </ul>
+      <!-- HIDDEN FOR MVP (mobile language selector). Site is English-only until
+           /pt/ and /es/ exist. Remove this comment wrapper once they are ready.
+      <div class="mobile-lang">
+        <label class="sr-only" for="lang-select-mobile">Choose language</label>
+        <select id="lang-select-mobile" class="lang-select">
+          <option value="en">English</option>
+          <option value="pt-br">Português</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+      -->
+    </nav>
+    <div class="header-controls">
+      <!-- HIDDEN FOR MVP (desktop language selector). Same as above — bring back
+           together with the /pt/ and /es/ routes.
+      <label class="sr-only" for="lang-select">Choose language</label>
+      <select id="lang-select" class="lang-select">
+        <option value="en">English</option>
+        <option value="pt-br">Português</option>
+        <option value="es">Español</option>
+      </select>
+      -->
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.4 6.4 0 0 0 10.5 10.5Z" stroke-linejoin="round"/></svg>
+      </button>
+      <button id="menu-toggle" class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const mainNav = document.getElementById('main-nav');
+  menuToggle?.addEventListener('click', () => {
+    const open = mainNav?.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // Theme toggle — persisted so it survives navigating between real pages
+  // (a single-file wireframe never needed this; separate pages do).
+  const themeToggle = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  const applyTheme = (theme: string) => {
+    root.setAttribute('data-theme', theme);
+    themeToggle?.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    themeToggle?.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  };
+
+  const saved = localStorage.getItem('theme');
+  if (saved) applyTheme(saved);
+
+  themeToggle?.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('theme', next);
+  });
+</script>

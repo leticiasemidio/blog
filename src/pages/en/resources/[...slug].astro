@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources', ({ data }) => !data.draft);
+  return resources.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'resources'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<BaseLayout
+  title={`${entry.data.title} — Leticia S. Emidio`}
+  description={entry.data.description}
+  currentPage="resources"
+>
+  <div class="wrap section article-page">
+    <a href="/en/resources/" class="link-arrow article-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+      Back to resources
+    </a>
+
+    <div class="article-header">
+      <span class={`tag tag-${entry.data.type}`}>{entry.data.category} · {entry.data.type}</span>
+      <h1>{entry.data.title}</h1>
+      <p class="article-subtitle">{entry.data.description}</p>
+    </div>
+
+    <div class="article-hero-img" aria-hidden="true">Image placeholder · big, 16:9</div>
+
+    <div class="article-body">
+      <Content />
+    </div>
+  </div>
+</BaseLayout>

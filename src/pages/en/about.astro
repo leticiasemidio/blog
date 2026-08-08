@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="About — Leticia S. Emidio"
+  description="UX writer, content strategist and knowledge builder. Experience, skills, clients and certifications."
+  currentPage="about"
+>
+  <div class="wrap section" style="padding-bottom:0;">
+    <p class="eyebrow">About</p>
+    <h1>Hi, I am Leticia S. Emidio</h1>
+    <p class="lede">UX writer and content strategist who combines human insight with AI to build content systems that scale.</p>
+  </div>
+
+  <nav class="about-subnav" aria-label="About page sections">
+    <div class="wrap">
+      <ul>
+        <li><a href="#about-bio">Bio</a></li>
+        <li><a href="#about-skills">Skills</a></li>
+        <li><a href="#about-experience">Experience</a></li>
+        <li><a href="#about-clients">Clients</a></li>
+        <li><a href="#about-testimonials">Testimonials</a></li>
+        <li><a href="#about-certifications">Certifications</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="resume-cta">
+      <div>
+        <h3 style="margin-bottom:2px;">Hiring? Get the short version.</h3>
+        <p style="margin:0;">Download a one-page résumé with experience, skills and contact details.</p>
+      </div>
+      <!-- Replace href with the real PDF once it's in /public, e.g. /resume.pdf -->
+      <a href="#" class="btn btn-primary">Download résumé (PDF)</a>
+    </div>
+  </div>
+
+  <div class="wrap about-block" id="about-bio">
+    <h2>Bio</h2>
+    <p style="max-width:70ch;">[Two to three paragraphs about your path into UX writing, the kind of problems you like solving, and how AI fits into your process. Replace this placeholder with your own story.]</p>
+  </div>
+
+  <div class="wrap about-block" id="about-skills">
+    <h2>Skills &amp; tools</h2>
+    <div style="display:flex; flex-direction:column; gap:28px;">
+      <div>
+        <h3>Hard skills</h3>
+        <div class="chip-row">
+          <span class="chip">UX writing</span><span class="chip">Content strategy</span><span class="chip">Content design systems</span><span class="chip">Content audits</span><span class="chip">Prompt engineering</span>
+        </div>
+      </div>
+      <div>
+        <h3>Soft skills</h3>
+        <div class="chip-row">
+          <span class="chip">Stakeholder alignment</span><span class="chip">Workshop facilitation</span><span class="chip">Editorial judgment</span><span class="chip">Mentoring</span>
+        </div>
+      </div>
+      <div>
+        <h3>Tools</h3>
+        <div class="chip-row">
+          <span class="chip">Figma</span><span class="chip">Notion</span><span class="chip">Confluence</span><span class="chip">Claude</span><span class="chip">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap about-block" id="about-experience">
+    <h2>Work experience</h2>
+    <p style="margin-bottom:20px;">Click a role to see the highlights.</p>
+    <details class="exp-card" open>
+      <summary class="exp-summary">
+        <span class="exp-logo" aria-hidden="true">Logo</span>
+        <span class="exp-heading">
+          <strong>Senior UX Writer &amp; AI Content Strategist</strong>
+          <span class="exp-company">[Company name]</span>
+          <span class="exp-date">[Year–present]</span>
+        </span>
+        <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+      </summary>
+      <div class="exp-body">
+        <p>[One line on scope and one measurable highlight.]</p>
+      </div>
+    </details>
+    <details class="exp-card">
+      <summary class="exp-summary">
+        <span class="exp-logo" aria-hidden="true">Logo</span>
+        <span class="exp-heading">
+          <strong>UX Writer</strong>
+          <span class="exp-company">[Company name]</span>
+          <span class="exp-date">[Year–Year]</span>
+        </span>
+        <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+      </summary>
+      <div class="exp-body">
+        <p>[One line on scope and one measurable highlight.]</p>
+      </div>
+    </details>
+    <details class="exp-card">
+      <summary class="exp-summary">
+        <span class="exp-logo" aria-hidden="true">Logo</span>
+        <span class="exp-heading">
+          <strong>Content Designer</strong>
+          <span class="exp-company">[Company name]</span>
+          <span class="exp-date">[Year–Year]</span>
+        </span>
+        <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+      </summary>
+      <div class="exp-body">
+        <p>[One line on scope and one measurable highlight.]</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="wrap about-block" id="about-clients">
+    <h2>Former clients</h2>
+    <div class="client-item">
+      <div class="chip-row" style="margin-bottom:6px;"><span class="chip">[Client A — fintech]</span></div>
+      <p style="margin:0;">[One-line highlight of the impact you had for this client.]</p>
+    </div>
+    <div class="client-item">
+      <div class="chip-row" style="margin-bottom:6px;"><span class="chip">[Client B — healthtech]</span></div>
+      <p style="margin:0;">[One-line highlight of the impact you had for this client.]</p>
+    </div>
+    <div class="client-item">
+      <div class="chip-row" style="margin-bottom:6px;"><span class="chip">[Client C — SaaS platform]</span></div>
+      <p style="margin:0;">[One-line highlight of the impact you had for this client.]</p>
+    </div>
+  </div>
+
+  <div class="wrap about-block" id="about-testimonials">
+    <h2>Testimonials</h2>
+    <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px,1fr));">
+      <div class="testimonial"><blockquote>[Sample testimonial text — replace with a real client quote.]</blockquote><cite>— [Name, role, company]</cite></div>
+      <div class="testimonial"><blockquote>[Sample testimonial text — replace with a real client quote.]</blockquote><cite>— [Name, role, company]</cite></div>
+      <div class="testimonial"><blockquote>[Sample testimonial text — replace with a real client quote.]</blockquote><cite>— [Name, role, company]</cite></div>
+    </div>
+  </div>
+
+  <div class="wrap about-block" id="about-certifications">
+    <h2>Certifications &amp; courses</h2>
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div><span class="exp-date">[Year]</span><h3 style="margin:2px 0 0;">[Certification or course name], [Institution]</h3></div>
+      <div><span class="exp-date">[Year]</span><h3 style="margin:2px 0 0;">[Event or conference attended]</h3></div>
+      <div><span class="exp-date">[Year]</span><h3 style="margin:2px 0 0;">[Degree], [Institution]</h3></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Scrollspy: highlights the current section in the sticky About sub-nav
+  const links = document.querySelectorAll('.about-subnav a');
+  const sections = Array.from(links)
+    .map((l) => document.querySelector((l as HTMLAnchorElement).getAttribute('href') || ''))
+    .filter(Boolean) as HTMLElement[];
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          links.forEach((l) => {
+            l.classList.toggle('active', l.getAttribute('href') === `#${entry.target.id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: '-160px 0px -70% 0px' }
+  );
+  sections.forEach((s) => observer.observe(s));
+</script>
